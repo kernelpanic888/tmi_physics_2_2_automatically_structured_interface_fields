@@ -1,0 +1,52 @@
+{
+  "test": "TMI Computational Test 26: Calibrated Qiskit-Aer Validation",
+  "status": "passed",
+  "profile": "best_by_channel",
+  "profile_config": {
+    "phase": {
+      "noise_scale": 4.0,
+      "idle_scale": 4.0,
+      "control_penalty_scale": 0.0
+    },
+    "amp": {
+      "noise_scale": 4.0,
+      "idle_scale": 4.0,
+      "control_penalty_scale": 0.0
+    },
+    "depol": {
+      "noise_scale": 8.0,
+      "idle_scale": 2.0,
+      "control_penalty_scale": 1.0
+    },
+    "mixed": {
+      "noise_scale": 4.0,
+      "idle_scale": 2.0,
+      "control_penalty_scale": 0.25
+    }
+  },
+  "overall": {
+    "n_total_runs": 192,
+    "shots": 4096,
+    "mean_P_base": 0.47933705647786456,
+    "mean_P_standard": 0.5203196207682291,
+    "mean_P_TMI": 0.5928153991699219,
+    "mean_delta_standard_minus_base": 0.040982564290364586,
+    "ci95_std_delta": [
+      0.03442249298095703,
+      0.04775543212890625
+    ],
+    "mean_delta_TMI_minus_standard": 0.0724957784016927,
+    "ci95_tmi_delta": [
+      0.06121972401936849,
+      0.08300078709920247
+    ],
+    "Pr_standard_greater_than_base": 0.75,
+    "Pr_TMI_greater_than_standard": 0.75,
+    "channels_passed_standard_base": 4,
+    "channels_passed_tmi_standard": 4,
+    "channels_total": 4,
+    "circuit_channel_cells_passed": 12,
+    "circuit_channel_cells_total": 16
+  },
+  "scientific_caution": "Qiskit-Aer calibrated simulator validation, not laboratory proof."
+}

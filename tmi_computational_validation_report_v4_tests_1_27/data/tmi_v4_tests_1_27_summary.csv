@@ -1,0 +1,28 @@
+test,name,criterion,result
+1,Ramsey toy model,T2_TMI > T2_standard,Delta T2 = 58.1 us
+2,Noisy Ramsey learning,T2_TMI > T2_standard,Delta T2 = 39.3 us
+3,Small quantum circuit,P_TMI > P_standard,Delta P = 0.115
+4,Stabilized interface,Stable adaptive control,Delta P = 0.026
+5,Surrogate Monte Carlo,E[P_TMI] > E[P_standard],"Delta = 0.0510, Pr = 0.864"
+6,Ablation study,Structured adaptive control,full TMI Delta = 0.0680
+7,Density-matrix Monte Carlo,Full matrix validation,"Delta = 0.0930, Pr = 0.933"
+8,Cross-model validation,Multiple circuit families,"Delta = 0.0660, Pr = 0.846"
+9,Failure-boundary map,Weak/failure regions,"failure = 0, weak = 6"
+10,Adversarial failure,Forced failure modes,failure cells = 58
+11,Safety recovery,Mitigation after failure,recovered = 31/58
+12,Reproducibility harness,One-command validation,passed = 11/11
+13,Independent simulator,Independent simulator validation,"Delta = 0.1121, Pr = 1.000"
+14,Noise-model stress,Noise class robustness,"passed = 3/4, Delta = 0.0068"
+15,Amplitude damping recovery,Relaxation-aware layer,Delta_relax = 0.1532
+16,Noise classifier,Classify then control,"accuracy = 0.952, Delta = 0.0554"
+17,Online noise drift,Dynamic reclassification,"Delta = 0.0255, acc = 0.816"
+18,Delayed feedback,Latency hurts online control,"online = 0.883, delayed d2 = 0.861"
+19,Latency policy optimization,Predictive latency layer,opt = 0.875 > d2 = 0.861
+20,Cost-overhead tradeoff,Utility and efficiency,U_highperf = 0.0705
+21,Cost-interface boundary,B_cost,lambda* = 0.0636
+22,Multi-objective control,Boundary manifold,"standard share = 0.608, cost-aware-low = 0.373"
+23,Standard simulator protocol,Backend-independent Qiskit-style protocol,"Delta = 0.0414, Pr = 0.750"
+24,Raw Qiskit-Aer execution,External simulator without calibration,"failed, Delta = -0.00097, cells = 0/16"
+25,Qiskit noise calibration,Simulator-interface calibration,54 candidate calibrations; Loss_sim = 0.00106
+26,Calibrated Qiskit-Aer validation,Held-out calibrated validation,"passed, Delta = 0.0725, cells = 12/16"
+27,Circuit-inverse audit,Correct inverse and rerun Qiskit-Aer,"passed, Delta = 0.1144, cells = 16/16"

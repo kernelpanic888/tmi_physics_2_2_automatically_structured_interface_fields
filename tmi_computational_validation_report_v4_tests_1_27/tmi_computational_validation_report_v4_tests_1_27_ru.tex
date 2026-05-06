@@ -1,0 +1,136 @@
+% !TEX TS-program = xelatex
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}\usepackage{polyglossia}
+\setmainlanguage{russian}\setotherlanguage{english}
+\setmainfont{DejaVu Serif}\setsansfont{DejaVu Sans}\setmonofont{DejaVu Sans Mono}
+\usepackage[a4paper,margin=2.05cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,graphicx,booktabs,longtable,array,hyperref,float,enumitem,microtype}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\setlength{\parskip}{0.52em}\setlength{\parindent}{0pt}\renewcommand{\arraystretch}{1.12}\sloppy
+
+\title{\textbf{Computational Validation of Adaptive Interface Control in TMI Quantum Systems}\\\large Расширенный отчёт v4 по вычислительным тестам 1--27}
+\author{Salkutsan Aleksey}\date{7 мая 2026}\begin{document}\maketitle
+\begin{abstract}
+Этот отчёт обновляет вычислительную линию ТМИ до Tests 1--27. Версия v4 добавляет внешнюю симуляторную ветку Tests 23--27: raw Qiskit-Aer failure, Qiskit noise calibration, calibrated Qiskit-Aer validation и circuit-inverse correctness audit. Главная проверяемая цепочка остаётся узкой:
+\[I_Q^{coh-auto}\Rightarrow T_2^{eff}\uparrow\Rightarrow P_{success}\uparrow.\]
+Новый внешний результат:
+\[Calibrate(I_{sim})\land Correct(I_{circuit})\Rightarrow P_{TMI}>P_{standard}>P_{base}.\]
+Это не лабораторное доказательство физического поля; это воспроизводимая вычислительная и Qiskit-Aer симуляторная валидация прикладного механизма автоинтерфейсного управления.
+\end{abstract}\tableofcontents\newpage
+\section{Статус отчёта}
+\[\boxed{\text{TMI Quantum Computational Validation v0.4}}\]
+Главная научная особенность v4: внешний Qiskit-Aer перенос сначала провалился, затем был откалиброван, а затем был очищен от ошибки обратной схемы.
+
+\section{Summary of Tests 1--27}
+\begin{longtable}{p{0.9cm}p{4.0cm}p{5.0cm}p{5.4cm}}
+\toprule
+Test & Name & Criterion / meaning & Result \\
+\midrule
+\endfirsthead
+\toprule
+Test & Name & Criterion / meaning & Result \\
+\midrule
+\endhead
+1 & Ramsey toy model & T2\_TMI > T2\_standard & Delta T2 = 58.1 us \\
+2 & Noisy Ramsey learning & T2\_TMI > T2\_standard & Delta T2 = 39.3 us \\
+3 & Small quantum circuit & P\_TMI > P\_standard & Delta P = 0.115 \\
+4 & Stabilized interface & Stable adaptive control & Delta P = 0.026 \\
+5 & Surrogate Monte Carlo & E[P\_TMI] > E[P\_standard] & Delta = 0.0510, Pr = 0.864 \\
+6 & Ablation study & Structured adaptive control & full TMI Delta = 0.0680 \\
+7 & Density-matrix Monte Carlo & Full matrix validation & Delta = 0.0930, Pr = 0.933 \\
+8 & Cross-model validation & Multiple circuit families & Delta = 0.0660, Pr = 0.846 \\
+9 & Failure-boundary map & Weak/failure regions & failure = 0, weak = 6 \\
+10 & Adversarial failure & Forced failure modes & failure cells = 58 \\
+11 & Safety recovery & Mitigation after failure & recovered = 31/58 \\
+12 & Reproducibility harness & One-command validation & passed = 11/11 \\
+13 & Independent simulator & Independent simulator validation & Delta = 0.1121, Pr = 1.000 \\
+14 & Noise-model stress & Noise class robustness & passed = 3/4, Delta = 0.0068 \\
+15 & Amplitude damping recovery & Relaxation-aware layer & Delta\_relax = 0.1532 \\
+16 & Noise classifier & Classify then control & accuracy = 0.952, Delta = 0.0554 \\
+17 & Online noise drift & Dynamic reclassification & Delta = 0.0255, acc = 0.816 \\
+18 & Delayed feedback & Latency hurts online control & online = 0.883, delayed d2 = 0.861 \\
+19 & Latency policy optimization & Predictive latency layer & opt = 0.875 > d2 = 0.861 \\
+20 & Cost-overhead tradeoff & Utility and efficiency & U\_highperf = 0.0705 \\
+21 & Cost-interface boundary & B\_cost & lambda* = 0.0636 \\
+22 & Multi-objective control & Boundary manifold & standard share = 0.608, cost-aware-low = 0.373 \\
+23 & Standard simulator protocol & Backend-independent Qiskit-style protocol & Delta = 0.0414, Pr = 0.750 \\
+24 & Raw Qiskit-Aer execution & External simulator without calibration & failed, Delta = -0.00097, cells = 0/16 \\
+25 & Qiskit noise calibration & Simulator-interface calibration & 54 candidate calibrations; Loss\_sim = 0.00106 \\
+26 & Calibrated Qiskit-Aer validation & Held-out calibrated validation & passed, Delta = 0.0725, cells = 12/16 \\
+27 & Circuit-inverse audit & Correct inverse and rerun Qiskit-Aer & passed, Delta = 0.1144, cells = 16/16 \\
+\bottomrule
+\end{longtable}
+
+\section{External simulator branch: Tests 23--27}
+
+Test 23 created a backend-independent standard-simulator protocol. The key update in v4 is the real Qiskit-Aer branch:
+\[
+Test\ 24:\ failed\quad\to\quad Test\ 25:\ calibration\quad\to\quad Test\ 26:\ calibrated\ passed\quad\to\quad Test\ 27:\ corrected\ passed.
+\]
+
+\subsection{Test 24: raw Qiskit-Aer failure}
+\[
+P_{base}=0.7535,\quad P_{standard}=0.7532,\quad P_{TMI}=0.7523.
+\]
+\[
+\Delta(P_{TMI}-P_{standard})=-0.00097,\qquad Pr(P_{TMI}>P_{standard})=0.0729.
+\]
+This established the need for simulator-interface calibration:
+\[
+I_{sim}:TMI\ model\to Qiskit\ NoiseModel,\qquad Loss_{sim}(I_{sim})>0.
+\]
+
+\subsection{Test 25: Qiskit noise calibration}
+Test 25 found 54 candidate calibrations. In the default-like calibrated regime:
+\[
+\Delta(P_{standard}-P_{base})=0.0191,\qquad \Delta(P_{TMI}-P_{standard})=0.0299.
+\]
+It also found incomplete idle-gate preservation:
+\[
+idle\_transpile\_id\_preservation\_rate=0.4375.
+\]
+
+\subsection{Test 26: calibrated Qiskit-Aer validation}
+\[
+P_{base}=0.4793,\quad P_{standard}=0.5203,\quad P_{TMI}=0.5928.
+\]
+\[
+\Delta(P_{standard}-P_{base})=0.0410,\qquad \Delta(P_{TMI}-P_{standard})=0.0725.
+\]
+Channels passed 4/4, but circuit-channel cells passed 12/16, pointing to a local circuit issue.
+
+\subsection{Test 27: circuit-inverse correctness audit}
+Test 27 found that the original circuits did not all pass ideal inverse correctness, but the corrected circuits did. The correction was:
+\[
+\texttt{S}\to\texttt{Sdg},\qquad S^{-1}=S^\dagger.
+\]
+After correction:
+\[
+P_{base}=0.5791,\quad P_{standard}=0.6432,\quad P_{TMI}=0.7576.
+\]
+\[
+\Delta(P_{standard}-P_{base})=0.0641,\qquad \Delta(P_{TMI}-P_{standard})=0.1144.
+\]
+\[
+\boxed{Pr(P_{standard}>P_{base})=1.0,\quad Pr(P_{TMI}>P_{standard})=1.0,\quad cells=16/16.}
+\]
+
+\section{External Qiskit-Aer visual summary}
+\begin{figure}[H]\centering\includegraphics[width=0.86\linewidth]{figures/fig_v4_qiskit_progression_mean_p.png}\caption{Mean success probabilities in Tests 24, 26 and 27.}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=0.86\linewidth]{figures/fig_v4_qiskit_delta_progression.png}\caption{$P_{TMI}-P_{standard}$: negative in Test 24, positive after calibration/correction.}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=0.80\linewidth]{figures/fig_v4_qiskit_cells_passed.png}\caption{Passed circuit-channel cells: 0/16, 12/16, 16/16.}\end{figure}
+
+\section{v4 formulas}
+\[
+\boxed{Calibrate(I_{sim})\land Correct(I_{circuit})\Rightarrow QiskitAerValidation}
+\]
+\[
+\boxed{Calibrate(I_{sim})\land Correct(I_{circuit})\Rightarrow P_{TMI}>P_{standard}>P_{base}}
+\]
+
+\section{Conclusion}
+Tests 1--22 established internal computational validation and boundary-manifold control. Tests 23--27 add the external simulator branch. The crucial scientific point is that the report includes the raw external failure, diagnosis, calibration, circuit correction and final corrected validation.
+
+\appendix\section{Состав пакета}
+Пакет содержит PDF и LaTeX исходники на русском и английском, JSON/CSV summary, графики внешней Qiskit-Aer ветки, пакеты Tests 12--27 и статусные файлы Tests 24--27.
+\end{document}

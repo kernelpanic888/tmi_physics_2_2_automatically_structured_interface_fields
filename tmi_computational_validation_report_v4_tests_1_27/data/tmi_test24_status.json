@@ -1,0 +1,22 @@
+{
+  "test": "TMI Computational Test 24: Real Qiskit-Aer Execution",
+  "status": "failed",
+  "overall": {
+    "n_total_runs": 32,
+    "shots": 1024,
+    "mean_P_base": 0.754241943359375,
+    "mean_P_standard": 0.753448486328125,
+    "mean_P_TMI": 0.7529296875,
+    "mean_delta_TMI_minus_standard": -0.000518798828125,
+    "ci95_delta": [
+      -0.00201416015625,
+      0.00045852661132812084
+    ],
+    "Pr_TMI_greater_than_standard": 0.125,
+    "noise_models_passed": 0,
+    "noise_models_total": 4,
+    "circuit_noise_cells_passed": 1,
+    "circuit_noise_cells_total": 16
+  },
+  "scientific_caution": "Qiskit-Aer simulator validation, not laboratory proof."
+}

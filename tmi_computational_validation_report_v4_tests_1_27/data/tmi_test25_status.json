@@ -1,0 +1,22 @@
+{
+  "test": "TMI Computational Test 25: Qiskit Noise Calibration and Simulator-Interface Loss",
+  "status": "calibration_completed",
+  "input_context": "Test 24 failed in real Qiskit-Aer; Test 25 diagnoses the mapping.",
+  "overall": {
+    "n_total_runs": 240,
+    "shots": 1024,
+    "n_env": 2,
+    "candidate_calibrations_found": 54,
+    "default_like_mean_delta_standard_base": 0.01959228515625,
+    "default_like_mean_delta_TMI_standard": 0.02532958984375,
+    "high_noise_no_penalty_mean_delta_standard_base": 0.05950927734375,
+    "high_noise_no_penalty_mean_delta_TMI_standard": 0.098388671875,
+    "idle_transpile_id_preservation_rate": 0.4375,
+    "mean_Loss_sim_total": 0.00108642578125
+  },
+  "interpretation": {
+    "candidate_calibrations_found": "Number of parameter settings where standard > base and TMI > standard.",
+    "Loss_sim_total": "Positive value means expected hierarchy is violated in the Qiskit mapping."
+  },
+  "scientific_caution": "Qiskit-Aer simulator calibration, not laboratory proof."
+}
