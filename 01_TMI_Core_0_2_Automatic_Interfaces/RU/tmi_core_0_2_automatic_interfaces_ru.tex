@@ -1,0 +1,222 @@
+% !TEX program = xelatex
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{russian}
+\setotherlanguage{english}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
+\newtheorem{definition}{Определение}
+\newtheorem{axiom}{Аксиома}
+\newtheorem{theorem}{Теорема}
+\newtheorem{proposition}{Утверждение}
+\newtheorem{remark}{Замечание}
+\DeclareMathOperator{\Valid}{ValidInterface}
+\DeclareMathOperator{\Interface}{Interface}
+\DeclareMathOperator{\Auto}{Auto}
+\DeclareMathOperator{\AlwaysAct}{AlwaysAct}
+\DeclareMathOperator{\Input}{Input}
+\DeclareMathOperator{\Adm}{Adm}
+\DeclareMathOperator{\Dir}{Dir}
+\DeclareMathOperator{\AutoAct}{AutoAct}
+\DeclareMathOperator{\PassiveChannel}{PassiveChannel}
+\DeclareMathOperator{\Control}{Control}
+\DeclareMathOperator{\Der}{Der}
+\DeclareMathOperator{\Struct}{Struct}
+\DeclareMathOperator{\Dist}{Dist}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Attr}{Attr}
+\DeclareMathOperator{\Coh}{Coh}
+\DeclareMathOperator{\Sync}{Sync}
+\DeclareMathOperator{\Loss}{Loss}
+\DeclareMathOperator{\Stab}{Stab}
+\newcommand{\M}{\mathcal M}
+\newcommand{\B}{\mathcal B}
+\newcommand{\Hcal}{\mathcal H}
+\newcommand{\Ispace}{\mathfrak I}
+\newcommand{\XiAuto}{\Xi_I^{\mathrm{auto}}}
+\newcommand{\XiMan}{\mathcal M_{\Xi}^{\mathrm{auto}}}
+\newcommand{\NXi}{\mathcal N_{\Xi}}
+\newcommand{\PiAmp}{\Pi_{\mathrm{amp}}}
+\newcommand{\PiStr}{\Pi_{\mathrm{str}}}
+\newcommand{\PiStruct}{\Pi_{\mathrm{struct}}}
+
+\title{\textbf{TMI-Core 0.2: Аксиоматическое ядро автоматических интерфейсов}\\
+\large Первичный интерфейс, дефиниционная автоматичность и переход к автоматически структурированным полям}
+\author{Salkutsan Aleksey}
+\date{2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Данный документ фиксирует обновлённое ядро Теории многообразных интерфейсов: \(\mathcal T_{MI}^{0.2}\). Центральный переход версии 0.2 состоит в том, что автоматичность больше не рассматривается как внешняя надстройка над интерфейсом. Она вводится как дефиниционное свойство действительного интерфейса: если структура не способна самостоятельно интерпретировать допустимый вход и сформировать понятный выход для другой системы, она является не полноценным интерфейсом, а пассивным каналом или частью метаинтерфейса. Ядро связывает аксиому первичного интерфейса, дефиниционную автоматичность, различение интерфейса и пассивного канала, производные интерфейсы, проекцию на физический слой и масштабирование автоматически структурированных интерфейсных полей.
+\end{abstract}
+\tableofcontents
+\newpage
+
+\section{Назначение документа}
+Цель этого документа - зафиксировать минимальное ядро, которое больше не расширяется новыми крупными сущностями. Дальнейшая работа должна уточнять определения, доказывать внутренние следствия и выводить проверяемые физические или инженерные проекции.
+
+\section{Первичные объекты}
+\begin{definition}[Нулевая недифференцированность]
+\(N_0\) - предельное состояние без различия, сторон, отношения, порядка и направления. Это не физический вакуум и не объект природы, а предельный символ недифференцированности внутри аксиоматической схемы.
+\end{definition}
+
+\begin{definition}[Первичный интерфейс]
+\(I_0\) - первая граница различения, через которую возникает минимальное различие.
+\end{definition}
+
+\begin{definition}[Первое различие]
+\(\Delta_0\) - минимальный результат действия первичного интерфейса. Оно разворачивается в минимальную двустороннюю структуру \((A,\neg A)\).
+\end{definition}
+
+\section{Аксиома первичного интерфейса}
+\begin{axiom}[Первичный интерфейс]
+\begin{equation}
+\boxed{A_{I_0}:\quad N_0\xrightarrow{I_0}\Delta_0\to(A,\neg A).}
+\end{equation}
+Краткая форма:
+\begin{equation}
+\boxed{N_0\xrightarrow{I_0}(A,\neg A).}
+\end{equation}
+\end{axiom}
+
+Смысл аксиомы: первичный интерфейс не соединяет заранее готовые стороны, а создаёт саму возможность сторон. До \(I_0\) нет ни \(A\), ни \(\neg A\). После возникновения границы появляется различие \(\Delta_0\), а различие разворачивается в минимальную структуру \((A,\neg A)\).
+
+\section{Действительный интерфейс}
+\begin{definition}[Действительный интерфейс]
+Действительный интерфейс \(I\) - структура, которая при наличии допустимого входа выполняет перевод, интерпретацию или структурирование между системами без внешнего управления каждым актом перевода.
+\end{definition}
+
+В рабочей форме:
+\begin{equation}
+I_{A\to B}\equiv\bigl(\partial(A,B),T_I(S_A\to S_B),\operatorname{Interp}_I,\Auto_I\bigr),
+\end{equation}
+где \(\partial(A,B)\) - граница взаимодействия, \(T_I\) - оператор перевода состояний, \(\operatorname{Interp}_I\) - операция интерпретации, а \(\Auto_I\) - самовыполнение интерфейсной функции при допустимом входе.
+
+\section{Аксиома автоматичности интерфейса}
+\begin{axiom}[Дефиниционная автоматичность]
+\begin{equation}
+\boxed{A_{\mathrm{auto}}:\quad \forall I\in\Ispace,\;\Valid(I)\Rightarrow\Auto(I).}
+\end{equation}
+Кратко:
+\begin{equation}
+\boxed{I\in\Ispace\Rightarrow\Auto(I).}
+\end{equation}
+\end{axiom}
+
+Автоматичность не означает постоянную активность:
+\begin{equation}
+\boxed{\Auto(I)\not\Rightarrow\AlwaysAct(I).}
+\end{equation}
+
+Автоматичность означает самозапуск при наличии допустимого входа:
+\begin{equation}
+\boxed{\Auto(I)\equiv\bigl(\Input(I)\land\Adm(I)\land\Dir(I)\Rightarrow\AutoAct(I)\bigr).}
+\end{equation}
+
+\section{Пассивный канал и метаинтерфейс}
+\begin{definition}[Пассивный канал]
+Пассивный канал - структура, через которую может проходить сигнал или состояние, но которая не выполняет собственную интерпретационную функцию без внешнего управляющего агента.
+\end{definition}
+
+Если переводом управляет внешний агент \(U_{\mathrm{ext}}\), то действительным интерфейсом является составная структура:
+\begin{equation}
+\boxed{I'=(I,U_{\mathrm{ext}}).}
+\end{equation}
+
+\begin{equation}
+\boxed{\PassiveChannel(I)\land\Control(U_{\mathrm{ext}},I)\Rightarrow\Interface(I').}
+\end{equation}
+
+\begin{theorem}[Различение интерфейса и канала]
+Если структура не выполняет интерфейсную функцию автоматически при допустимом входе, то она либо не является действительным интерфейсом, либо является пассивным каналом, входящим в более широкий метаинтерфейс:
+\begin{equation}
+\boxed{\neg\Auto(I)\Rightarrow \neg\Valid(I)\lor\PassiveChannel(I).}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+По аксиоме автоматичности действительный интерфейс удовлетворяет \(\Valid(I)\Rightarrow\Auto(I)\). Контрапозиция даёт \(\neg\Auto(I)\Rightarrow\neg\Valid(I)\). Если при этом структура всё же участвует в передаче, но не выполняет перевод сама, она является пассивным каналом в составе более широкой системы \(I'=(I,U_{\mathrm{ext}})\). Следовательно, утверждение выполняется внутри аксиоматической схемы.
+\end{proof}
+
+\section{Производные интерфейсы}
+\begin{definition}[Производный интерфейс]
+\(\Der(I,I_0)\) означает, что интерфейс \(I\) является производным от первичного интерфейса \(I_0\), то есть принадлежит пространству интерфейсов, возникающему после первичного различения.
+\end{definition}
+
+\begin{equation}
+\boxed{\Der(I,I_0)\Rightarrow I\in\Ispace\Rightarrow\Auto(I).}
+\end{equation}
+
+Для производных интерфейсов автоматичность раскрывается как условная:
+\begin{equation}
+\boxed{\Der(I,I_0)\Rightarrow\bigl(\Input(I)\land\Adm(I)\land\Dir(I)\Rightarrow\AutoAct(I)\bigr).}
+\end{equation}
+
+\section{Мост к физическому слою}
+Если физическое поле является интерфейсным полем,
+\begin{equation}
+\Xi_I\in\Ispace_{\mathrm{phys}},
+\end{equation}
+то оно автоматично как интерфейс:
+\begin{equation}
+\boxed{\Xi_I\in\Ispace_{\mathrm{phys}}\Rightarrow\Auto(\Xi_I).}
+\end{equation}
+Следовательно, физическое интерфейсное поле должно рассматриваться как автоматически структурированное:
+\begin{equation}
+\boxed{\Xi_I\in\Ispace_{\mathrm{phys}}\Rightarrow\XiAuto.}
+\end{equation}
+
+\section{Проекционная цепочка}
+Полная форма поля:
+\begin{equation}
+\boxed{\XiAuto.}
+\end{equation}
+Её проекции:
+\begin{equation}
+\boxed{\XiAuto\to\Xi_I\to\chi_I.}
+\end{equation}
+Здесь \(\chi_I\) - минимальная скалярная амплитудная проекция:
+\begin{equation}
+\boxed{\chi_I=\PiAmp(\XiAuto).}
+\end{equation}
+
+\section{Масштабирование}
+Локальное автоматически структурированное поле масштабируется в сеть и многообразие:
+\begin{equation}
+\boxed{\XiAuto\to\{\Xi_{I,k}^{\mathrm{auto}}\}_{k\in K}\to\NXi\to\XiMan\to\Struct_I(\M).}
+\end{equation}
+
+\section{Объединённая формула ядра}
+\begin{equation}
+\boxed{N_0\xrightarrow{I_0}\Delta_0\to(A,\neg A)\Rightarrow\Ispace\Rightarrow\Auto(I).}
+\end{equation}
+\begin{equation}
+\boxed{I_0\Rightarrow\Ispace\Rightarrow\Auto(I)\Rightarrow\XiAuto\Rightarrow\XiMan\Rightarrow\Struct_I(\M).}
+\end{equation}
+
+\section{Статус утверждений}
+\begin{itemize}
+\item Уровень A: аксиомы и определения, например \(\Valid(I)\Rightarrow\Auto(I)\).
+\item Уровень B: внутренние теоремы, например переход от \(\XiAuto\) к \(\Struct_I\) при условиях стабилизации.
+\item Уровень C: физические гипотезы, например существование \(\XiAuto\) как физического механизма.
+\item Уровень D: проверяемые следствия, например увеличение времени когерентности в квантовом эксперименте.
+\end{itemize}
+
+\section{Заключение}
+TMI-Core 0.2 фиксирует центральный стержень теории: первичный интерфейс создаёт возможность различия; действительный интерфейс автоматичен по определению; физические интерфейсные поля являются автоматически структурированными; множество таких полей образует масштабируемое интерфейсное многообразие, способное стабилизироваться как структура.
+
+\begin{thebibliography}{9}
+\bibitem{TMIcore} Salkutsan Aleksey. \textit{Theory of Manifold Interfaces. An Axiomatic Conceptual-Mathematical Framework of Interfaciality, Meaning, and Cognition}. Zenodo. \href{https://doi.org/10.5281/zenodo.19940675}{doi:10.5281/zenodo.19940675}.
+\bibitem{TMIphysics} Salkutsan Aleksey. \textit{Theory of Manifold Interfaces: A Regularized Effective Physical Layer, Observable Consequences, and Limitations}. 2026.
+\end{thebibliography}
+\end{document}
