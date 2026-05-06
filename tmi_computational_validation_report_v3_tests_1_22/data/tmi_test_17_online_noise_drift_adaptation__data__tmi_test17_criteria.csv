@@ -1,0 +1,7 @@
+criterion,passed
+online_beats_standard_mean,True
+online_beats_standard_probability,True
+online_beats_static_mean,True
+online_beats_static_probability,True
+online_accuracy_beats_static_accuracy,True
+online_close_to_oracle,True

@@ -1,0 +1,22 @@
+{
+  "test": "TMI Computational Test 20: Compute-Cost / Control-Overhead Tradeoff",
+  "status": "passed",
+  "best_lambda": 0.0,
+  "criteria": {
+    "cost_aware_balanced_gt_standard": 1.0,
+    "cost_aware_balanced_pareto_efficient": false,
+    "cost_aware_balanced_utility_gt_latency_optimized": 0.0,
+    "cost_aware_balanced_utility_gt_high_perf": 0.0
+  },
+  "overall": {
+    "n_eval_runs": 168,
+    "n_tuning_runs": 168,
+    "n_segments": 10584,
+    "mean_P_standard": 0.791299731398058,
+    "mean_P_cost_aware_balanced": 0.8720878023155424,
+    "mean_cost_standard": 0.7000000000000002,
+    "mean_cost_cost_aware_balanced": 2.0599999999999996,
+    "mean_deltaP_cost_aware_balanced": 0.08078807091748443,
+    "mean_efficiency_cost_aware_balanced": 0.05940299332167972
+  }
+}

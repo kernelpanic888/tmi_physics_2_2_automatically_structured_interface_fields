@@ -1,0 +1,6 @@
+lambda_fixed,mean_k_star,median_k_star,ci95_low,ci95_high,interpretation
+0.01,6.360849684855688,6.402111700293468,2.4043106578999587,11.210400804332687,"if cost_multiplier > k*, cost_aware_low beats high_perf_online"
+0.02,3.180424842427844,3.201055850146734,1.2021553289499793,5.605200402166344,"if cost_multiplier > k*, cost_aware_low beats high_perf_online"
+0.035,1.8173856242444826,1.8291747715124194,0.686945902257131,3.2029716583807675,"if cost_multiplier > k*, cost_aware_low beats high_perf_online"
+0.05,1.2721699369711377,1.2804223400586936,0.4808621315799918,2.242080160866537,"if cost_multiplier > k*, cost_aware_low beats high_perf_online"
+0.07,0.9086928121222413,0.9145873857562097,0.3434729511285655,1.6014858291903837,"if cost_multiplier > k*, cost_aware_low beats high_perf_online"

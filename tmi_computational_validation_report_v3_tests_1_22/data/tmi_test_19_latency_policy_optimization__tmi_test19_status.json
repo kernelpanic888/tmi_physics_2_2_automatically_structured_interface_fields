@@ -1,0 +1,29 @@
+{
+  "test": "TMI Computational Test 19: Latency-Aware Policy Optimization",
+  "status": "passed",
+  "best_params": {
+    "risk_lambda": 0.0,
+    "smoothing_alpha": 0.45,
+    "delay": 2,
+    "tuning_objective": "maximize latency_optimized - delayed_d2 on tuning split",
+    "tuning_score": 0.01382469494708254
+  },
+  "criteria": {
+    "latency_optimized_gt_standard": 1.0,
+    "latency_optimized_gt_delayed_d2": 0.9490740740740741,
+    "latency_optimized_gt_delayed_d3": 0.9259259259259259,
+    "mean_delta_latency_opt_minus_d2": 0.014360120691014304,
+    "mean_delta_latency_opt_minus_d3": 0.012393292738524877
+  },
+  "overall": {
+    "n_eval_runs": 216,
+    "n_tuning_runs": 216,
+    "n_segments": 15552,
+    "classifier_accuracy": 0.8076131687242798,
+    "mean_P_standard": 0.7928165146124777,
+    "mean_P_delayed_d2": 0.8606733583401319,
+    "mean_P_delayed_d3": 0.8626401862926214,
+    "mean_P_latency_optimized": 0.8750334790311461,
+    "mean_P_oracle": 0.8925545308762237
+  }
+}

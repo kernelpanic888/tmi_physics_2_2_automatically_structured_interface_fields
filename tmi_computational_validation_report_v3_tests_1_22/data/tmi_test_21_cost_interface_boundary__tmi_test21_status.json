@@ -1,0 +1,24 @@
+{
+  "test": "TMI Computational Test 21: Cost-Interface Boundary Test",
+  "status": "passed",
+  "main_boundary": {
+    "policy_a": "high_perf_online",
+    "policy_b": "cost_aware_low",
+    "mean_lambda_star": 0.06360849684855689,
+    "median_lambda_star": 0.06402111700293468,
+    "meaning": "if lambda > lambda*, cost_aware_low beats high_perf_online; if lambda < lambda*, high_perf_online beats cost_aware_low"
+  },
+  "phase_grid": {
+    "n_lambda_values": 57,
+    "n_cost_multiplier_values": 50,
+    "n_grid_cells": 2850,
+    "cells_high_perf_best": 404,
+    "cells_cost_aware_low_best": 2446,
+    "cells_latency_optimized_best": 0
+  },
+  "criteria": {
+    "positive_boundary_found": true,
+    "cost_aware_region_found": true,
+    "high_perf_region_found": true
+  }
+}

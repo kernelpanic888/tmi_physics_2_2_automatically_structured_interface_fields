@@ -1,4 +1,0 @@
-mode,control_parameter_u,gamma_eff_1_per_us,T2_eff_us,relative_to_base,interpretation
-base_no_protection,0.0,0.01951019485507346,51.255254364615354,1.0,baseline
-standard_fixed_protection,0.45,0.007952043518220285,125.75383896085694,2.4534819018998477,fixed non-adaptive protection
-tmi_adaptive_interface,0.6031713926933391,0.006159202896232639,162.35867154362842,3.167649318227061,adaptive interface learned from noisy Ramsey observations

@@ -1,0 +1,2 @@
+test_id,name,n_circuit_families,n_total_environments,mean_P_base,mean_P_standard,mean_P_TMI,mean_delta_TMI_minus_standard,ci95_delta_low,ci95_delta_high,Pr_TMI_greater_than_standard,circuits_passed,circuits_total,passed
+Test 13,Independent simulator implementation,4,72,0.3562103035757513,0.43209413488718,0.5442281890364634,0.11213405414928336,0.09625527905784172,0.12815992184506736,1.0,4,4,True

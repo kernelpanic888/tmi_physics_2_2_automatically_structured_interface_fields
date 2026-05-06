@@ -1,0 +1,36 @@
+{
+  "test": "TMI Computational Test 22: Multi-Objective Interface Control",
+  "status": "passed",
+  "objectives": [
+    "P",
+    "Cost",
+    "Safety",
+    "Latency",
+    "Robustness"
+  ],
+  "n_weight_samples": 24000,
+  "n_boundary_points_10pct": 2400,
+  "pareto_efficient_policies": [
+    "cost_aware_balanced",
+    "cost_aware_low",
+    "high_perf_online",
+    "latency_optimized",
+    "oracle_high_cost",
+    "standard"
+  ],
+  "winner_share": {
+    "cost_aware_balanced": 0.0,
+    "cost_aware_low": 0.3730833333333333,
+    "high_perf_online": 0.004375,
+    "latency_optimized": 0.0021666666666666666,
+    "oracle_high_cost": 0.012625,
+    "standard": 0.60775
+  },
+  "criteria": {
+    "multiple_policies_win_in_weight_space": true,
+    "boundary_points_found": true,
+    "pareto_front_nonempty": true,
+    "named_profiles_evaluated": 8
+  },
+  "interpretation": "Preference space contains multiple policy regions; switching surfaces form an approximate boundary manifold."
+}

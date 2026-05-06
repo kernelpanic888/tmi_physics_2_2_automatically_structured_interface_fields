@@ -1,4 +1,0 @@
-mode,u,P_success,failure_probability,T2_eff_us,p_gate,criterion
-base_no_protection,0.0,0.18202061546965265,0.8179793845303474,51.71167209761035,0.0016,baseline
-standard_fixed_protection,0.45,0.38622541661666626,0.6137745833833337,130.02314148064136,0.0018025,fixed non-adaptive protection
-tmi_adaptive_interface,0.4979791270253773,0.4314079614535409,0.5685920385464591,151.66708375165143,0.001847983210952957,success if P_TMI > P_base; strong if P_TMI > P_std

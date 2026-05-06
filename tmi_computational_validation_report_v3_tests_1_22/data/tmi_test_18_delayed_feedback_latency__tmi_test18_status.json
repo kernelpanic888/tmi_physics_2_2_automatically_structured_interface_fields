@@ -1,0 +1,27 @@
+{
+  "test": "TMI Computational Test 18: Delayed Feedback / Latency Stress Test",
+  "status": "passed",
+  "criteria": {
+    "online_gt_standard": 1.0,
+    "latency_aware_gt_standard": 1.0,
+    "latency_aware_gt_d2": 0.4453125,
+    "latency_aware_gt_d3": 0.3619791666666667
+  },
+  "overall": {
+    "n_runs": 384,
+    "n_segments": 27648,
+    "n_sequences": 6,
+    "n_circuits": 4,
+    "classifier_accuracy": 0.8249421296296297,
+    "mean_P_standard": 0.791529389110702,
+    "mean_P_online_no_delay": 0.8833830949229577,
+    "mean_P_delayed_d1": 0.862224005763002,
+    "mean_P_delayed_d2": 0.8608896044711528,
+    "mean_P_delayed_d3": 0.8619541754096129,
+    "mean_P_latency_aware": 0.8587421934073339,
+    "mean_P_oracle": 0.8922236568677476,
+    "mean_delta_latency_aware_minus_standard": 0.06721280429663175,
+    "mean_delta_latency_aware_minus_d2": -0.002147411063818923,
+    "mean_delta_latency_aware_minus_d3": -0.003211982002279292
+  }
+}

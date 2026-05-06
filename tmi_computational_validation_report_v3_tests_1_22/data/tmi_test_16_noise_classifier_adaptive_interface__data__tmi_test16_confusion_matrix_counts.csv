@@ -1,0 +1,5 @@
+noise_class_true,amplitude_damping,dephasing,depolarizing,mixed
+amplitude_damping,120,0,0,0
+dephasing,0,120,0,0
+depolarizing,0,0,120,0
+mixed,14,7,2,97

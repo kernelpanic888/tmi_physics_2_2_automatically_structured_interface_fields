@@ -1,0 +1,12 @@
+test,name,metric,value,passed
+Test 1,Ramsey toy model,T2_TMI > T2_standard,58.08950086058522,True
+Test 2,Noisy Ramsey learning,T2_TMI > T2_standard,39.28457954502028,True
+Test 3,Small circuit,P_TMI > P_standard,0.11510905443185254,True
+Test 4,Stabilized adaptive interface,P_stabilized > P_standard,0.02645954835363848,True
+Test 5,Surrogate Monte Carlo,mean_delta > 0 and Pr > 0.5,0.06564768966026698,True
+Test 6,Ablation study,full_TMI > standard,0.08629388442915344,True
+Test 7,Density-matrix MC compact check,mean_delta > 0 and Pr > 0.5,0.022934695399015874,True
+Test 8,Cross-model validation,pooled mean_delta > 0 and Pr > 0.5,0.05357874897503796,True
+Test 9,Failure-boundary mapping,weak/failure map generated,4.0,True
+Test 10,Adversarial failure,failure cells found,29.0,True
+Test 11,Safety recovery,safety improves adversarial delta,0.004238000214893452,True

@@ -1,0 +1,15 @@
+metric,value
+n_total_runs,216.0
+noise_models,4.0
+circuit_families,3.0
+mean_P_base,0.8787706318359527
+mean_P_standard,0.9134659546102092
+mean_P_TMI,0.9202325432297862
+mean_delta_TMI_minus_standard,0.0067665886195770785
+ci95_delta_low,0.005375243017032841
+ci95_delta_high,0.008262592191537202
+Pr_TMI_greater_than_standard,0.6666666666666666
+noise_models_passed,3.0
+noise_models_total,4.0
+circuit_model_cells_passed,9.0
+circuit_model_cells_total,12.0
