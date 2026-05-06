@@ -1,0 +1,4 @@
+mode,gamma_eff_1_per_us,T2_eff_us,relative_to_base,criterion
+base_no_protection,0.02,50.00000000000001,1.0,baseline
+standard_protection,0.008333333333333333,120.00000000000003,2.4000000000000004,standard method
+tmi_adaptive_interface,0.005600400739761818,178.55865079443043,3.571173015888608,success if T2_TMI > T2_base; strong if T2_TMI > T2_std

@@ -1,0 +1,224 @@
+% !TEX program = xelatex
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{english}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
+\newtheorem{definition}{Definition}
+\newtheorem{axiom}{Axiom}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\DeclareMathOperator{\Valid}{ValidInterface}
+\DeclareMathOperator{\Interface}{Interface}
+\DeclareMathOperator{\Auto}{Auto}
+\DeclareMathOperator{\AlwaysAct}{AlwaysAct}
+\DeclareMathOperator{\Input}{Input}
+\DeclareMathOperator{\Adm}{Adm}
+\DeclareMathOperator{\Dir}{Dir}
+\DeclareMathOperator{\AutoAct}{AutoAct}
+\DeclareMathOperator{\PassiveChannel}{PassiveChannel}
+\DeclareMathOperator{\Control}{Control}
+\DeclareMathOperator{\Der}{Der}
+\DeclareMathOperator{\Struct}{Struct}
+\DeclareMathOperator{\Dist}{Dist}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Attr}{Attr}
+\DeclareMathOperator{\Coh}{Coh}
+\DeclareMathOperator{\Sync}{Sync}
+\DeclareMathOperator{\Loss}{Loss}
+\DeclareMathOperator{\Stab}{Stab}
+\newcommand{\M}{\mathcal M}
+\newcommand{\B}{\mathcal B}
+\newcommand{\Hcal}{\mathcal H}
+\newcommand{\Ispace}{\mathfrak I}
+\newcommand{\XiAuto}{\Xi_I^{\mathrm{auto}}}
+\newcommand{\XiMan}{\mathcal M_{\Xi}^{\mathrm{auto}}}
+\newcommand{\NXi}{\mathcal N_{\Xi}}
+\newcommand{\PiAmp}{\Pi_{\mathrm{amp}}}
+\newcommand{\PiStr}{\Pi_{\mathrm{str}}}
+\newcommand{\PiStruct}{\Pi_{\mathrm{struct}}}
+
+\title{\textbf{TMI-Core 0.2: The Axiomatic Core of Automatic Interfaces}\\
+\large The Primary Interface, Definitional Automaticity, and the Transition to Automatically Structured Fields}
+\author{Salkutsan Aleksey}
+\date{2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This document fixes the updated core of the Theory of Manifold Interfaces, denoted by \(\mathcal T_{MI}^{0.2}\). The central transition of version 0.2 is that automaticity is no longer treated as an external addition to an interface. It is introduced as a definitional property of a valid interface: if a structure cannot autonomously interpret an admissible input and produce an intelligible output for another system, then it is not a full interface, but a passive channel or a component of a meta-interface. The core connects the primary interface axiom, definitional automaticity, the distinction between an interface and a passive channel, derived interfaces, projection into the physical layer, and the scaling of automatically structured interface fields.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Purpose of the Document}
+The purpose of this document is to fix a minimal core that should not be expanded by adding new major entities. Further work should refine definitions, prove internal consequences, and derive testable physical or engineering projections.
+
+\section{Primary Objects}
+\begin{definition}[Null Undifferentiation]
+\(N_0\) is the limiting state without distinction, sides, relation, order, or direction. It is not a physical vacuum and not an object of nature, but a limiting symbol of undifferentiation inside the axiomatic scheme.
+\end{definition}
+
+\begin{definition}[Primary Interface]
+\(I_0\) is the first boundary of differentiation through which a minimal distinction arises.
+\end{definition}
+
+\begin{definition}[First Distinction]
+\(\Delta_0\) is the minimal result of the action of the primary interface. It unfolds into the minimal two-sided structure \((A,\neg A)\).
+\end{definition}
+
+\section{The Primary Interface Axiom}
+\begin{axiom}[Primary Interface]
+\begin{equation}
+\boxed{A_{I_0}:\quad N_0\xrightarrow{I_0}\Delta_0\to(A,\neg A).}
+\end{equation}
+A shorter form is
+\begin{equation}
+\boxed{N_0\xrightarrow{I_0}(A,\neg A).}
+\end{equation}
+\end{axiom}
+
+The meaning of the axiom is that the primary interface does not connect already existing sides; it creates the very possibility of sides. Before \(I_0\), there is no \(A\) and no \(\neg A\). After the boundary arises, the distinction \(\Delta_0\) appears, and this distinction unfolds into the minimal structure \((A,\neg A)\).
+
+\section{Valid Interface}
+\begin{definition}[Valid Interface]
+A valid interface \(I\) is a structure that, in the presence of an admissible input, performs translation, interpretation, or structuring between systems without an external controller directing every act of translation.
+\end{definition}
+
+In working form:
+\begin{equation}
+I_{A\to B}\equiv\bigl(\partial(A,B),T_I(S_A\to S_B),\operatorname{Interp}_I,\Auto_I\bigr),
+\end{equation}
+where \(\partial(A,B)\) is the boundary of interaction, \(T_I\) is the state-translation operator, \(\operatorname{Interp}_I\) is the operation of interpretation, and \(\Auto_I\) is the self-execution of the interface function under an admissible input.
+
+\section{The Axiom of Interface Automaticity}
+\begin{axiom}[Definitional Automaticity]
+\begin{equation}
+\boxed{A_{\mathrm{auto}}:\quad \forall I\in\Ispace,\;\Valid(I)\Rightarrow\Auto(I).}
+\end{equation}
+In short:
+\begin{equation}
+\boxed{I\in\Ispace\Rightarrow\Auto(I).}
+\end{equation}
+\end{axiom}
+
+Automaticity does not mean permanent activity:
+\begin{equation}
+\boxed{\Auto(I)\not\Rightarrow\AlwaysAct(I).}
+\end{equation}
+
+Automaticity means self-activation when an admissible input is present:
+\begin{equation}
+\boxed{\Auto(I)\equiv\bigl(\Input(I)\land\Adm(I)\land\Dir(I)\Rightarrow\AutoAct(I)\bigr).}
+\end{equation}
+
+\section{Passive Channel and Meta-Interface}
+\begin{definition}[Passive Channel]
+A passive channel is a structure through which a signal or a state can pass, but which does not perform its own interpretive function without an external controlling agent.
+\end{definition}
+
+If translation is controlled by an external agent \(U_{\mathrm{ext}}\), then the valid interface is the composite structure
+\begin{equation}
+\boxed{I'=(I,U_{\mathrm{ext}}).}
+\end{equation}
+
+\begin{equation}
+\boxed{\PassiveChannel(I)\land\Control(U_{\mathrm{ext}},I)\Rightarrow\Interface(I').}
+\end{equation}
+
+\begin{theorem}[Interface-Channel Distinction]
+If a structure does not perform the interface function automatically under an admissible input, then it is either not a valid interface or it is a passive channel included in a broader meta-interface:
+\begin{equation}
+\boxed{\neg\Auto(I)\Rightarrow \neg\Valid(I)\lor\PassiveChannel(I).}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By the axiom of automaticity, a valid interface satisfies \(\Valid(I)\Rightarrow\Auto(I)\). Its contrapositive gives \(\neg\Auto(I)\Rightarrow\neg\Valid(I)\). If the structure nevertheless participates in transmission but does not perform translation by itself, then it is a passive channel inside a broader system \(I'=(I,U_{\mathrm{ext}})\). Therefore the statement holds inside the axiomatic scheme.
+\end{proof}
+
+\section{Derived Interfaces}
+\begin{definition}[Derived Interface]
+\(\Der(I,I_0)\) means that the interface \(I\) is derived from the primary interface \(I_0\), i.e. it belongs to the space of interfaces that becomes possible after the primary differentiation.
+\end{definition}
+
+\begin{equation}
+\boxed{\Der(I,I_0)\Rightarrow I\in\Ispace\Rightarrow\Auto(I).}
+\end{equation}
+
+For derived interfaces, automaticity is unfolded conditionally:
+\begin{equation}
+\boxed{\Der(I,I_0)\Rightarrow\bigl(\Input(I)\land\Adm(I)\land\Dir(I)\Rightarrow\AutoAct(I)\bigr).}
+\end{equation}
+
+\section{Bridge to the Physical Layer}
+If a physical field is an interface field,
+\begin{equation}
+\Xi_I\in\Ispace_{\mathrm{phys}},
+\end{equation}
+then it is automatic as an interface:
+\begin{equation}
+\boxed{\Xi_I\in\Ispace_{\mathrm{phys}}\Rightarrow\Auto(\Xi_I).}
+\end{equation}
+Consequently, the physical interface field should be considered as automatically structured:
+\begin{equation}
+\boxed{\Xi_I\in\Ispace_{\mathrm{phys}}\Rightarrow\XiAuto.}
+\end{equation}
+
+\section{Projection Chain}
+The full form of the field is
+\begin{equation}
+\boxed{\XiAuto.}
+\end{equation}
+Its projections are
+\begin{equation}
+\boxed{\XiAuto\to\Xi_I\to\chi_I.}
+\end{equation}
+Here \(\chi_I\) is the minimal scalar amplitude projection:
+\begin{equation}
+\boxed{\chi_I=\PiAmp(\XiAuto).}
+\end{equation}
+
+\section{Scaling}
+A local automatically structured field scales into a network and a manifold:
+\begin{equation}
+\boxed{\XiAuto\to\{\Xi_{I,k}^{\mathrm{auto}}\}_{k\in K}\to\NXi\to\XiMan\to\Struct_I(\M).}
+\end{equation}
+
+\section{Unified Core Formula}
+\begin{equation}
+\boxed{N_0\xrightarrow{I_0}\Delta_0\to(A,\neg A)\Rightarrow\Ispace\Rightarrow\Auto(I).}
+\end{equation}
+\begin{equation}
+\boxed{I_0\Rightarrow\Ispace\Rightarrow\Auto(I)\Rightarrow\XiAuto\Rightarrow\XiMan\Rightarrow\Struct_I(\M).}
+\end{equation}
+
+\section{Status of the Claims}
+\begin{itemize}
+\item Level A: axioms and definitions, for example \(\Valid(I)\Rightarrow\Auto(I)\).
+\item Level B: internal theorems, for example the transition from \(\XiAuto\) to \(\Struct_I\) under stabilization conditions.
+\item Level C: physical hypotheses, for example the existence of \(\XiAuto\) as a physical mechanism.
+\item Level D: testable consequences, for example an increase of coherence time in a quantum experiment.
+\end{itemize}
+
+\section{Conclusion}
+TMI-Core 0.2 fixes the central spine of the theory: the primary interface creates the possibility of distinction; a valid interface is automatic by definition; physical interface fields are automatically structured; and a collection of such fields forms a scalable interface manifold capable of stabilizing as structure.
+
+\begin{thebibliography}{9}
+\bibitem{TMIcore} Salkutsan Aleksey. \textit{Theory of Manifold Interfaces. An Axiomatic Conceptual-Mathematical Framework of Interfaciality, Meaning, and Cognition}. Zenodo. \href{https://doi.org/10.5281/zenodo.19940675}{doi:10.5281/zenodo.19940675}.
+\bibitem{TMIphysics} Salkutsan Aleksey. \textit{TMI-Physics 2.2: Automatically Structured Interface Fields}. 2026.
+\end{thebibliography}
+\end{document}

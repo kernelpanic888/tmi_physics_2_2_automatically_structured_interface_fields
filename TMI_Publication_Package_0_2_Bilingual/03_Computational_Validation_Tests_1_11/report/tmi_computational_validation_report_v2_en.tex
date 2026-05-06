@@ -1,0 +1,564 @@
+% !TEX TS-program = pdflatex
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=2.05cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{microtype}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue}
+\setlength{\parskip}{0.55em}
+\setlength{\parindent}{0pt}
+\renewcommand{\arraystretch}{1.15}
+\newcommand{\TMI}{\mathrm{TMI}}
+\newcommand{\std}{\mathrm{std}}
+\newcommand{\base}{\mathrm{base}}
+\newcommand{\Prob}{\operatorname{Pr}}
+\newcommand{\Auto}{\operatorname{Auto}}
+\newcommand{\Safe}{\operatorname{Safe}}
+
+\title{\textbf{Computational Validation of Adaptive Interface Control in TMI Quantum Systems}\\
+\large Extended Technical Report on Computational Tests 1--11}
+\author{Salkutsan Aleksey}
+\date{May 6, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This document consolidates the computational test line for quantum-system predictions in the Theory of Manifold Interfaces (TMI). This version extends the initial Tests 1--6 and adds Tests 7--11: full density-matrix Monte Carlo validation, cross-model validation, failure-boundary mapping, adversarial failure testing, and safety-aware recovery testing.
+
+The tested engineering core has the form
+\[
+I_Q^{coh-auto}\Rightarrow Loss_{coh}\downarrow\Rightarrow T_2^{eff}\uparrow\Rightarrow P_{success}\uparrow.
+\]
+The report does not claim a laboratory proof of the physical existence of the field $\Xi_I^{auto}$. It fixes a more modest result: in computational models, adaptive interface control can increase effective coherence and circuit success probability, but it has a domain of applicability and requires a safety-aware layer under adversarial conditions.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Status and Scientific Caution}
+
+This document is a \textbf{computational validation report}, not a laboratory confirmation. We do not attempt to verify the entire Theory of Manifold Interfaces at once. We test one narrow consequence:
+\[
+\boxed{
+I_Q^{coh-auto}
+\Rightarrow
+\gamma_{eff}\downarrow
+\Rightarrow
+T_2^{eff}\uparrow
+\Rightarrow
+P_{success}\uparrow
+}
+\]
+where $I_Q^{coh-auto}$ is a coherence-preserving automatic interface, $\gamma_{eff}=1/T_2^{eff}$ is the effective decoherence rate, and $P_{success}$ is the probability of obtaining the correct result in a small quantum circuit.
+
+Starting with Test 10 and Test 11, the report also fixes a negative and safety-related consequence:
+\[
+\boxed{\Auto(I)\not\Rightarrow \Safe(I)}
+\]
+and
+\[
+\boxed{\Auto(I)+\text{SafetyLayer}\Rightarrow \text{SaferAdaptiveControl}.}
+\]
+In other words, adaptivity by itself is not a guarantee of safety: under misleading feedback and high control cost, an automatic interface can lose to a fixed standard control mode.
+
+\section{Connection to TMI Core 0.2 and TMI-Physics 2.2}
+
+The computational test line does not replace Core 0.2 or TMI-Physics 2.2. Its correct role is that of an applied computational module:
+\[
+\boxed{
+\text{TMI Core 0.2}
+\Rightarrow
+\text{TMI-Physics 2.2}
+\Rightarrow
+\text{Computational Validation}
+}
+\]
+
+In Core 0.2, automaticity is understood as a definitional property of a valid interface:
+\[
+\operatorname{Valid}(I)\Rightarrow \Auto(I),
+\qquad
+\Auto(I)\not\Rightarrow \operatorname{AlwaysAct}(I).
+\]
+In TMI-Physics 2.2 this logic is projected into the physical layer:
+\[
+\Xi_I\in\mathfrak I_{phys}
+\Rightarrow
+\Auto(\Xi_I)
+\Rightarrow
+\Xi_I^{auto}.
+\]
+The computational tests examine an engineering projection of this principle: can an automatic coherence-control interface improve observable metrics in quantum-system models?
+
+\section{Summary of Tests 1--11}
+
+For Tests 1--4, the final column typically lists the values in the order base / standard / TMI.
+
+\begin{longtable}{p{2.0cm}p{4.0cm}p{4.2cm}p{5.0cm}}
+\toprule
+Test & Meaning & Criterion & Result \\
+\midrule
+\endfirsthead
+\toprule
+Test & Meaning & Criterion & Result \\
+\midrule
+\endhead
+
+Test 1 & Ramsey toy model & $T_2^{TMI}>T_2^{std}>T_2^{base}$ & 50.0 / 120.0 / 178.6 $\mu s$ \\
+Test 2 & Noisy Ramsey learning & $T_2^{TMI}>T_2^{std}>T_2^{base}$ & 51.3 / 125.8 / 162.4 $\mu s$ \\
+Test 3 & Small circuit & $P_{TMI}>P_{std}>P_{base}$ & 0.182 / 0.386 / 0.431 \\
+Test 4 & Stabilized interface & $P_{stab}>P_{std}>P_{base}$ & 0.180 / 0.328 / 0.465 \\
+Test 5 & Surrogate Monte Carlo & $E[P_{TMI}]>E[P_{std}]$ & mean $\Delta=0.0512$, $Pr=0.864$ \\
+Test 6 & Ablation study & full TMI $>$ standard & full $\Delta\approx 0.0677$ \\
+Test 7 & Full density-matrix MC & $E[P_{TMI}]>E[P_{std}]$ & mean $\Delta=0.0935$, $Pr=0.933$ \\
+Test 8 & Cross-model validation & advantage across circuit families & mean $\Delta=0.0662$, $Pr=0.846$ \\
+Test 9 & Failure-boundary map & locate weak/failure regions & failure cells $=0$, weak cells $=6$ \\
+Test 10 & Adversarial failure & force $P_{TMI}\le P_{std}$ & failure cells $=58$, weak cells $=22$ \\
+Test 11 & Safety recovery & reduce failure rate & $\Delta_{safety}=0.0139$, recovered cells $=31/58$ \\
+
+\bottomrule
+\end{longtable}
+
+\section{Tests 1--6: Basic Computational Validation Line}
+
+\subsection{Test 1: Ramsey toy model}
+
+The coherence model is
+\[
+C(t)=C_0 e^{-t/T_2}.
+\]
+The result is
+\[
+T_2^{base}=50.0\,\mu s,
+\quad
+T_2^{std}=120.0\,\mu s,
+\quad
+T_2^{TMI}=178.6\,\mu s.
+\]
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.86\linewidth]{figures/fig_test1_ramsey.png}
+\caption{Test 1: simple Ramsey coherence model.}
+\end{figure}
+
+\subsection{Test 2: Noisy Ramsey learning}
+
+The automatic interface must learn the protection parameter $u$ from noisy Ramsey observations. The result is
+\[
+T_2^{base}=51.3\,\mu s,
+\quad
+T_2^{std}=125.8\,\mu s,
+\quad
+T_2^{TMI}=162.4\,\mu s.
+\]
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.86\linewidth]{figures/fig_test2_noisy_ramsey.png}
+\caption{Test 2: Ramsey curves under noisy observations.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.86\linewidth]{figures/fig_test2_learning.png}
+\caption{Test 2: learning of the protection parameter $u$.}
+\end{figure}
+
+\subsection{Test 3: Small quantum circuit}
+
+The circuit is constructed as
+\[
+|000\rangle\to \text{entangling circuit}\to \text{inverse circuit}\to |000\rangle.
+\]
+The ideal success probability is
+\[
+P_{success}=\Pr(000).
+\]
+The result is
+\[
+P_{base}=0.182,\quad P_{std}=0.386,\quad P_{TMI}=0.431.
+\]
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.82\linewidth]{figures/fig_test3_success.png}
+\caption{Test 3: success probability of a small quantum circuit.}
+\end{figure}
+
+\subsection{Test 4: Stabilized adaptive interface}
+
+Test 4 adds memory, smoothing, step limitation, and repeated observations:
+\[
+\text{AutoInterface}+\text{Memory}+\text{Smoothing}+\text{StepLimit}\Rightarrow\text{StableControl}.
+\]
+The result is
+\[
+P_{base}=0.180,\quad P_{std}=0.328,
+\quad P_{raw}=0.465,\quad P_{stab}=0.465.
+\]
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.82\linewidth]{figures/fig_test4_success.png}
+\caption{Test 4: stabilized adaptive interface improves $P_{success}$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.86\linewidth]{figures/fig_test4_learning.png}
+\caption{Test 4: raw adaptive control jumps, while stabilized adaptive control keeps the parameter closer to the optimal regime.}
+\end{figure}
+
+\subsection{Test 5: Monte Carlo surrogate validation}
+
+Test 5 checks statistical advantage across 500 random environments using a fast circuit-level surrogate:
+\[
+\mathbb E[P_{TMI}]>\mathbb E[P_{std}],
+\qquad
+\Pr(P_{TMI}>P_{std})>0.5.
+\]
+The result is
+\[
+\mathbb E[P_{base}]=0.245,\quad
+\mathbb E[P_{std}]=0.417,\quad
+\mathbb E[P_{TMI}]=0.468.
+\]
+\[
+\mathbb E[P_{TMI}-P_{std}]=0.0512,
+\quad
+\Pr(P_{TMI}>P_{std})=0.864.
+\]
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.82\linewidth]{figures/fig_test5_mean.png}
+\caption{Test 5: mean $P_{success}$ in Monte Carlo surrogate validation.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.82\linewidth]{figures/fig_test5_delta.png}
+\caption{Test 5: distribution of the advantage $P_{TMI}-P_{std}$.}
+\end{figure}
+
+\subsection{Test 6: Ablation study}
+
+Test 6 shows that raw adaptivity alone does not guarantee an improvement:
+\[
+\text{RawAdaptivity}\not\Rightarrow\text{Improvement}.
+\]
+The advantage appears as a property of a structured automatic interface:
+\[
+\text{StructuredAutoInterface}\Rightarrow\text{StableParameterTracking}\Rightarrow P_{success}\uparrow.
+\]
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.90\linewidth]{figures/fig_test6_ablation.png}
+\caption{Test 6: ablation study across interface-control configurations.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.90\linewidth]{figures/fig_test6_delta_full.png}
+\caption{Test 6: losses relative to the full TMI mechanism.}
+\end{figure}
+
+\section{Tests 7--8: Robustness and Cross-Model Validation}
+
+\subsection{Test 7: Full density-matrix Monte Carlo}
+
+Test 7 repeats the statistical validation of Test 5, but now on the full 3-qubit density-matrix toy model. This removes the main limitation of Test 5: dependence on a fast surrogate.
+
+\[
+\mathbb E[P_{base}]=0.182,\quad
+\mathbb E[P_{std}]=0.322,\quad
+\mathbb E[P_{TMI}]=0.415.
+\]
+\[
+\mathbb E[P_{TMI}-P_{std}]=0.0935,
+\quad
+\Pr(P_{TMI}>P_{std})=0.933.
+\]
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.82\linewidth]{figures/fig_test7_mean.png}
+\caption{Test 7: full density-matrix Monte Carlo, mean $P_{success}$.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.70\linewidth]{figures/fig_test7_paired.png}
+\caption{Test 7: paired comparison $P_{std}$ vs $P_{TMI}$.}
+\end{figure}
+
+\subsection{Test 8: Cross-model validation}
+
+Test 8 checks not one circuit, but four circuit families. The overall result is
+\[
+\mathbb E[P_{base}]=0.292,\quad
+\mathbb E[P_{std}]=0.379,\quad
+\mathbb E[P_{TMI}]=0.445.
+\]
+\[
+\mathbb E[P_{TMI}-P_{std}]=0.0662,
+\quad
+\Pr(P_{TMI}>P_{std})=0.846.
+\]
+
+\begin{longtable}{p{5.3cm}rrrrr}
+\toprule
+Circuit & Base & Standard & TMI & $\Delta$ & $Pr$ \\
+\midrule
+\endfirsthead
+\toprule
+Circuit & Base & Standard & TMI & $\Delta$ & $Pr$ \\
+\midrule
+\endhead
+balanced\_entangle\_inverse & 0.169 & 0.277 & 0.376 & 0.0994 & 1.000 \\
+deep\_chain\_inverse & 0.253 & 0.322 & 0.377 & 0.0553 & 0.923 \\
+ghz\_long\_idle\_inverse & 0.495 & 0.512 & 0.527 & 0.0148 & 0.462 \\
+local\_mix\_inverse & 0.249 & 0.404 & 0.500 & 0.0955 & 1.000 \\
+\bottomrule
+\end{longtable}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\linewidth]{figures/fig_test8_mean_by_circuit.png}
+\caption{Test 8: mean $P_{success}$ by circuit family.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.90\linewidth]{figures/fig_test8_delta_by_circuit.png}
+\caption{Test 8: TMI advantage over standard control by circuit family.}
+\end{figure}
+
+\paragraph{Important nuance.}
+For the \texttt{ghz\_long\_idle\_inverse} circuit, the mean advantage is positive but weaker and less stable than for the other circuit families. This shows that the mechanism is not equally strong for all circuit types.
+
+\section{Tests 9--11: Applicability Boundaries and Safety Recovery}
+
+\subsection{Test 9: Failure-boundary test}
+
+Test 9 searches not only for success, but also for weakening zones. We vary the drift speed of the hidden optimum and the measurement noise. The failure criterion is
+\[
+\mathbb E[P_{TMI}-P_{std}]\le 0
+\quad\text{or}\quad
+\Pr(P_{TMI}>P_{std})\le 0.5.
+\]
+
+The overall result is
+\[
+\mathbb E[P_{TMI}-P_{std}]=0.0606,
+\quad
+\Pr(P_{TMI}>P_{std})=0.849.
+\]
+Strict failure cells found:
+\[
+0,
+\]
+weak zones found:
+\[
+6.
+\]
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.82\linewidth]{figures/fig_test9_delta_heatmap.png}
+\caption{Test 9: heatmap of the advantage $P_{TMI}-P_{std}$ over drift/noise.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.82\linewidth]{figures/fig_test9_prob_heatmap.png}
+\caption{Test 9: probability $\Pr(P_{TMI}>P_{std})$ over drift/noise.}
+\end{figure}
+
+\subsection{Test 10: Adversarial failure test}
+
+Test 10 intentionally creates adversarial conditions:
+\[
+\text{fast drift}+\text{high noise}+\text{misleading feedback}+\text{high control penalty}.
+\]
+The goal is to obtain real cases of
+\[
+P_{TMI}\le P_{std}.
+\]
+
+The result is
+\[
+\mathbb E[P_{TMI}-P_{std}]=0.0025,
+\quad
+\Pr(P_{TMI}>P_{std})=0.530.
+\]
+Failure cells:
+\[
+58,
+\]
+weak cells:
+\[
+22.
+\]
+
+The key conclusion is
+\[
+\boxed{\text{AdaptiveInterface}\not\Rightarrow\text{SafeInterface}.}
+\]
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.84\linewidth]{figures/fig_test10_failure_dist.png}
+\caption{Test 10: adversarial failure distribution.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.70\linewidth]{figures/fig_test10_failure_heatmap.png}
+\caption{Test 10: number of failure cells by misleading bias and control penalty.}
+\end{figure}
+
+\subsection{Test 11: Safety-aware recovery}
+
+Test 11 takes only the failure cells from Test 10 and checks whether the advantage can be recovered by a safety layer:
+\[
+\text{AutoInterface}+\text{SafetyPenalty}+\text{ConservativeFallback}+\text{ValidationChannel}\Rightarrow\text{SaferControl}.
+\]
+
+\begin{longtable}{p{3.8cm}rrrrr}
+\toprule
+Mode & Mean $P$ & $\Delta$ vs std & $Pr(>std)$ & Failure rate & Mean $u$ \\
+\midrule
+\endfirsthead
+\toprule
+Mode & Mean $P$ & $\Delta$ vs std & $Pr(>std)$ & Failure rate & Mean $u$ \\
+\midrule
+\endhead
+standard & 0.2799 & 0.00000 & 0.000 & -- & 0.450 \\
+adversarial\_TMI & 0.2799 & -0.00002 & 0.478 & 0.522 & 0.472 \\
+safety\_v1 & 0.2939 & 0.01392 & 0.617 & 0.383 & 0.395 \\
+recovery\_v2 & 0.2932 & 0.01328 & 0.579 & 0.421 & 0.386 \\
+\bottomrule
+\end{longtable}
+
+The main result is
+\[
+\Delta_{adv}=-0.00002,
+\quad
+\Delta_{safety}=0.01392,
+\quad
+\Delta_{recovery}=0.01328.
+\]
+Recovery v2 recovered
+\[
+31/58
+\]
+failure cells.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.82\linewidth]{figures/fig_test11_boxplot.png}
+\caption{Test 11: safety recovery on failure zones from Test 10.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.82\linewidth]{figures/fig_test11_failure_rate.png}
+\caption{Test 11: failure-rate reduction under safety-aware control.}
+\end{figure}
+
+\section{Final Theoretical Consequences}
+
+\subsection{Positive consequence}
+
+Under ordinary and moderately noisy conditions, the computational line supports the engineering hypothesis
+\[
+\boxed{
+I_Q^{coh-auto}
+\Rightarrow
+T_2^{eff}\uparrow
+\Rightarrow
+P_{success}\uparrow
+}
+\]
+
+\subsection{Negative consequence}
+
+Test 10 introduces an important boundary:
+\[
+\boxed{
+\text{MisleadingFeedback}\land\text{HighControlPenalty}
+\Rightarrow
+P_{TMI}\le P_{std}
+}
+\]
+Thus, an automatic interface can make errors if its feedback channel systematically misleads it.
+
+\subsection{Safety-aware consequence}
+
+Test 11 shows that a safety layer reduces the failure region, but does not eliminate it completely:
+\[
+\boxed{
+\text{AutoInterface}+\text{SafetyLayer}
+\Rightarrow
+\text{SaferAdaptiveControl}
+}
+\]
+but not
+\[
+\text{AutoInterface}+\text{SafetyLayer}
+\Rightarrow
+\text{PerfectControl}.
+\]
+
+\section{Next Steps}
+
+The next steps are:
+\begin{enumerate}[label=\arabic*.]
+\item Prepare an independent implementation of Tests 7--8 in a Qiskit/Cirq-style framework.
+\item Repeat the key tests on a standard noise simulator.
+\item Separate the theoretical TMI-Physics 2.2 module from the computational supplement.
+\item Prepare a reproducible repository structure: code, data, figures, and reports.
+\item After independent simulator validation, move to a cloud-QPU protocol.
+\end{enumerate}
+
+\section{Conclusion}
+
+Tests 1--8 show that adaptive interface control can improve $T_2^{eff}$ and $P_{success}$ in numerical models. Tests 9--11 make the line scientifically more honest: they show not only the region of success, but also the region of weakness, failure, and partial recovery through a safety-aware layer.
+
+The final formula of the report is
+\[
+\boxed{
+\text{Adaptive Interface Control}
+\Rightarrow
+\text{Measurable Computational Advantage}
+}
+\]
+provided that the environment is observable enough, the feedback channel is stable enough, and control is constrained by safety-aware limits.
+
+\appendix
+\section{Package Contents}
+
+The report archive contains:
+\begin{itemize}
+\item the PDF and LaTeX source of this report;
+\item figures/ - key plots from Tests 1--11;
+\item data/ - CSV results and summary files;
+\item test\_archives/ - archives of individual Tests 1--11.
+\end{itemize}
+
+\end{document}
