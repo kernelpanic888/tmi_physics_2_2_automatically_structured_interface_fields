@@ -1,0 +1,32 @@
+{
+  "test": "TMI Computational Test 28: Out-of-Distribution Qiskit-Aer Generalization",
+  "status": "passed",
+  "profile": "stress_high_signal",
+  "log_file": "results_test28_stress_high_signal/test28_console.log",
+  "criteria": {
+    "all_ood_ideal_inverses_passed": true,
+    "mean_delta_standard_minus_base_positive": true,
+    "mean_delta_TMI_minus_standard_positive": true,
+    "min_cell_pass_rate_required": 0.8,
+    "cell_pass_rate": 1.0
+  },
+  "overall": {
+    "n_ood_circuits": 6,
+    "ood_circuits_passed": 6,
+    "n_total_runs": 288,
+    "shots": 4096,
+    "mean_P_base": 0.29135725233289933,
+    "mean_P_standard": 0.3424411349826389,
+    "mean_P_TMI": 0.46158430311414933,
+    "mean_delta_standard_minus_base": 0.051083882649739586,
+    "mean_delta_TMI_minus_standard": 0.11914316813151042,
+    "Pr_standard_greater_than_base": 0.9722222222222222,
+    "Pr_TMI_greater_than_standard": 1.0,
+    "channels_passed_standard_base": 4,
+    "channels_passed_tmi_standard": 4,
+    "channels_total": 4,
+    "circuit_channel_cells_passed": 24,
+    "circuit_channel_cells_total": 24
+  },
+  "scientific_caution": "Qiskit-Aer out-of-distribution simulator generalization test, not laboratory proof."
+}

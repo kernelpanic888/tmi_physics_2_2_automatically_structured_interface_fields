@@ -1,0 +1,46 @@
+{
+  "test": "TMI Computational Test 28: Out-of-Distribution Qiskit-Aer Generalization",
+  "status": "passed",
+  "profiles": [
+    {
+      "profile": "best_by_channel",
+      "status": "passed",
+      "mean_P_base": 0.3638,
+      "mean_P_standard": 0.4305,
+      "mean_P_TMI": 0.5719,
+      "mean_delta_standard_minus_base": 0.0666,
+      "mean_delta_TMI_minus_standard": 0.1414,
+      "Pr_TMI_greater_than_standard": 1.0,
+      "cells_passed": 24,
+      "cells_total": 24,
+      "note": "reported uploaded result"
+    },
+    {
+      "profile": "conservative",
+      "status": "passed",
+      "mean_P_base": 0.29135725233289933,
+      "mean_P_standard": 0.3424411349826389,
+      "mean_P_TMI": 0.46158430311414933,
+      "mean_delta_standard_minus_base": 0.051083882649739586,
+      "mean_delta_TMI_minus_standard": 0.11914316813151042,
+      "Pr_TMI_greater_than_standard": 1.0,
+      "cells_passed": 24,
+      "cells_total": 24,
+      "note": "current uploaded status file"
+    },
+    {
+      "profile": "stress_high_signal",
+      "status": "passed",
+      "mean_P_base": 0.2914,
+      "mean_P_standard": 0.3424,
+      "mean_P_TMI": 0.4616,
+      "mean_delta_standard_minus_base": 0.051,
+      "mean_delta_TMI_minus_standard": 0.1191,
+      "Pr_TMI_greater_than_standard": 1.0,
+      "cells_passed": 24,
+      "cells_total": 24,
+      "note": "reported uploaded result"
+    }
+  ],
+  "scientific_caution": "Qiskit-Aer out-of-distribution simulator generalization test, not laboratory proof."
+}

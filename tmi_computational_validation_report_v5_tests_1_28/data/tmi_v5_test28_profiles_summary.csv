@@ -1,0 +1,4 @@
+profile,status,mean_P_base,mean_P_standard,mean_P_TMI,mean_delta_standard_minus_base,mean_delta_TMI_minus_standard,Pr_TMI_greater_than_standard,cells_passed,cells_total,note
+best_by_channel,passed,0.3638,0.4305,0.5719,0.0666,0.1414,1.0,24,24,reported uploaded result
+conservative,passed,0.29135725233289933,0.3424411349826389,0.46158430311414933,0.051083882649739586,0.11914316813151042,1.0,24,24,current uploaded status file
+stress_high_signal,passed,0.2914,0.3424,0.4616,0.051,0.1191,1.0,24,24,reported uploaded result

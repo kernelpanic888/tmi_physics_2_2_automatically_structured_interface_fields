@@ -1,0 +1,39 @@
+{
+  "test": "TMI Computational Test 27: Circuit-Inverse Correctness Audit",
+  "status": "passed",
+  "log_file": "results_test27/test27_console.log",
+  "audit": {
+    "original_all_ideal_inverses_passed": false,
+    "corrected_all_ideal_inverses_passed": true,
+    "ideal_tolerance": 1e-12
+  },
+  "validation": {
+    "validation": "corrected_circuits_calibrated_qiskit_aer",
+    "profile": "best_by_channel",
+    "overall": {
+      "n_total_runs": 192,
+      "shots": 4096,
+      "mean_P_base": 0.5791460673014323,
+      "mean_P_standard": 0.6432037353515625,
+      "mean_P_TMI": 0.7576255798339844,
+      "mean_delta_standard_minus_base": 0.0640576680501302,
+      "ci95_std_delta": [
+        0.06039787928263347,
+        0.06778087615966796
+      ],
+      "mean_delta_TMI_minus_standard": 0.11442184448242188,
+      "ci95_tmi_delta": [
+        0.1096814473470052,
+        0.11923526128133138
+      ],
+      "Pr_standard_greater_than_base": 1.0,
+      "Pr_TMI_greater_than_standard": 1.0,
+      "channels_passed_standard_base": 4,
+      "channels_passed_tmi_standard": 4,
+      "channels_total": 4,
+      "circuit_channel_cells_passed": 16,
+      "circuit_channel_cells_total": 16
+    }
+  },
+  "scientific_caution": "Qiskit-Aer calibrated simulator validation and circuit audit, not laboratory proof."
+}
