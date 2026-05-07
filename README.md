@@ -1,9 +1,5 @@
-Джарвис сделал README под текущую структуру репозитория: **Core 0.2 → TMI-Physics 2.2 → Computational Validation Tests 1–28**, с аккуратной научной осторожностью: вычислительные тесты поддерживают инженерную модель, но не доказывают физическое существование поля в природе. Это согласуется с текущим ядром TMI-Physics 2.2 и вычислительной веткой.  
+# TMI-Physics 2.2
 
-Замени содержимое `README.md` на это:
-
-````markdown
-# TMI-Physics 2.2  
 ## Automatically Structured Interface Fields
 
 **Theory of Manifold Interfaces — Physics Module**
@@ -23,7 +19,7 @@ The central idea of this module is:
 
 The physical chain of TMI-Physics 2.2 is:
 
-```math
+$$
 g
 \Rightarrow
 \operatorname{Adm}_c(g)
@@ -41,19 +37,19 @@ I_0
 \mathcal M_{\Xi}^{auto}
 \Rightarrow
 \operatorname{Struct}_I(\mathcal M)
-````
+$$
 
 Where:
 
-* `g` — geometry / metric structure;
-* `Adm_c(g)` — causally admissible transitions defined by geometry;
-* `𝓗_I(g)` — interface Hilbert space;
-* `Ψ_I` — quantum interface state;
-* `Dist_poss(Ψ_I; g)` — distribution of possible transitions;
-* `I₀` — primary interface / first boundary of distinction;
-* `Ξ_I^auto` — automatically structured interface field;
-* `𝓜_Ξ^auto` — manifold of automatically structured interface fields;
-* `Struct_I(𝓜)` — stabilized physical interface structure.
+- `g` — geometry / metric structure;
+- `Adm_c(g)` — causally admissible transitions defined by geometry;
+- `𝓗_I(g)` — interface Hilbert space;
+- `Ψ_I` — quantum interface state;
+- `Dist_poss(Ψ_I; g)` — distribution of possible transitions;
+- `I₀` — primary interface / first boundary of distinction;
+- `Ξ_I^auto` — automatically structured interface field;
+- `𝓜_Ξ^auto` — manifold of automatically structured interface fields;
+- `Struct_I(𝓜)` — stabilized physical interface structure.
 
 ---
 
@@ -63,43 +59,43 @@ TMI-Physics 2.2 extends the earlier scalar interface-field model.
 
 The previous minimal field was:
 
-```math
+$$
 \chi_I
-```
+$$
 
 In TMI-Physics 2.2, this scalar field is treated as a projection of a more complete automatically structured field:
 
-```math
+$$
 \Xi_I^{auto}
 \rightarrow
 \Xi_I
 \rightarrow
 \chi_I
-```
+$$
 
 So the old scalar field is not discarded. It remains the minimal observable amplitude projection:
 
-```math
+$$
 \chi_I = \Pi_{\mathrm{amp}}(\Xi_I^{auto})
-```
+$$
 
 The structural projection is:
 
-```math
+$$
 \Xi_I^{auto}
 \rightarrow
 \operatorname{Struct}_I
-```
+$$
 
 ---
 
 ## Main Theoretical Claim
 
-The module does **not** claim that an automatically structured interface field has already been experimentally discovered in nature.
+This module does **not** claim that an automatically structured interface field has already been experimentally discovered in nature.
 
 Instead, it proves an internal theoretical implication:
 
-```math
+$$
 \left[
 \Xi_I^{auto}\in\Gamma(\operatorname{End}(\mathcal H_I))
 \land
@@ -109,7 +105,7 @@ Instead, it proves an internal theoretical implication:
 \right]
 \Rightarrow
 \operatorname{Struct}_I
-```
+$$
 
 In words:
 
@@ -148,7 +144,7 @@ In words:
 
 The computational validation branch tests the engineering projection of the theory:
 
-```math
+$$
 I_Q^{coh-auto}
 \Rightarrow
 \gamma_{eff}\downarrow
@@ -156,7 +152,7 @@ I_Q^{coh-auto}
 T_2^{eff}\uparrow
 \Rightarrow
 P_{success}\uparrow
-```
+$$
 
 The goal is to check whether an adaptive / automatic interface-control mechanism can improve simulated quantum-circuit performance.
 
@@ -168,13 +164,13 @@ The validation compares three regimes:
 
 Expected hierarchy:
 
-```math
+$$
 P_{success}^{TMI}
 >
 P_{success}^{standard}
 >
 P_{success}^{base}
-```
+$$
 
 ---
 
@@ -182,15 +178,15 @@ P_{success}^{base}
 
 The computational tests are:
 
-* simulator-based;
-* reproducible within the provided code and settings;
-* useful as engineering validation;
-* not laboratory proof;
-* not proof that `Ξ_I^auto` exists as a physical field in nature.
+- simulator-based;
+- reproducible within the provided code and settings;
+- useful as engineering validation;
+- not laboratory proof;
+- not proof that `Ξ_I^auto` exists as a physical field in nature.
 
 The correct interpretation is:
 
-> The tests support the internal computational mechanism of adaptive interface control.
+> The tests support the internal computational mechanism of adaptive interface control.  
 > They do not prove the full physical ontology of TMI-Physics.
 
 ---
@@ -211,41 +207,71 @@ Computational Validation Module
 
 Defines the primary interface and automaticity:
 
-```math
+$$
 N_0
 \xrightarrow{I_0}
 \Delta_0
 \rightarrow
 (A,\neg A)
-```
+$$
 
-```math
+$$
 Valid(I) \Rightarrow Auto(I)
-```
+$$
 
 ### 2. TMI-Physics 2.2
 
 Applies the core to physics:
 
-```math
+$$
 \Xi_I\in\mathfrak I_{phys}
 \Rightarrow
 Auto(\Xi_I)
 \Rightarrow
 \Xi_I^{auto}
-```
+$$
 
 ### 3. Computational Validation
 
 Tests the adaptive control projection:
 
-```math
+$$
 I_Q^{coh-auto}
 \Rightarrow
 T_2^{eff}\uparrow
 \Rightarrow
 P_{success}\uparrow
+$$
+
+---
+
+## Current Computational Status
+
+The validation branch currently includes reports up to:
+
+```text
+Tests 1–28
 ```
+
+The most important external simulator sequence is:
+
+```text
+Test 24: raw Qiskit-Aer mapping failed
+Test 25: simulator-interface calibration found working regions
+Test 26: calibrated Qiskit-Aer validation passed
+Test 27: circuit-inverse audit corrected the inverse circuit
+Test 28: out-of-distribution circuit generalization
+```
+
+The key corrected validation result is:
+
+$$
+Calibrate(I_{sim})
+\land
+Correct(I_{circuit})
+\Rightarrow
+P_{TMI}>P_{standard}>P_{base}
+$$
 
 ---
 
@@ -264,13 +290,13 @@ Theory of Manifold Interfaces, Physics Module, 2026.
 
 ---
 
-## Related Concepts
+## Related Concept
 
 This repository is part of the broader **Theory of Manifold Interfaces**, where mathematics is treated as an interface of cognition:
 
-```math
+$$
 M_X \equiv I_{X\leftrightarrow U}
-```
+$$
 
 In words:
 
@@ -291,11 +317,11 @@ Publication package    0.2 bilingual
 
 This repository is intended for:
 
-* theory development;
-* computational validation;
-* reproducibility;
-* publication preparation;
-* future experimental design.
+- theory development;
+- computational validation;
+- reproducibility;
+- publication preparation;
+- future experimental design.
 
 ---
 
@@ -305,10 +331,5 @@ License information should be added before public release.
 
 Recommended options:
 
-* MIT License for code;
-* CC BY 4.0 for papers and theoretical documents.
-
-```
-
-Коротко: README теперь выглядит как научный репозиторий, а не просто папка с архивами.
-```
+- MIT License for code;
+- CC BY 4.0 for papers and theoretical documents.
