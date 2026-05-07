@@ -329,3 +329,18 @@ TSWLatexianTemp*
 # option is specified. Footnotes are the stored in a file with suffix Notes.bib.
 # Uncomment the next line to have this generated file ignored.
 #*Notes.bib
+
+# Private QPU validation artifacts
+results_test29*/
+results_test30*/
+results_test31*/
+results_test32*/
+results_test33*/
+results_test34*/
+results_test35*/
+PRIVATE_QPU_TESTS*/
+*tmi_computational_test_3*
+*backend_profiling*
+*qpu*
+*private*
+*calibration_drift*
