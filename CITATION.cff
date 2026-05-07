@@ -1,11 +1,25 @@
 cff-version: 1.2.0
-title: "TMI-Physics 2.2: Automatically Structured Interface Fields"
 message: "If you use this work, please cite it as below."
-type: report
+title: "TMI-Physics 2.2: Automatically Structured Interface Fields"
+type: software
+
 authors:
-  - family-names: Salkutsan
-    given-names: Aleksey
-version: v0.4
-date-released: 2026-05-07
-license: CC-BY-4.0
+  - family-names: "Salkutsan"
+    given-names: "Aleksey"
+
+version: "v0.4"
+date-released: "2026-05-07"
 doi: "10.5281/zenodo.20071704"
+
+license: "CC-BY-4.0"
+
+repository-code: "https://github.com/osalkutsan-godaddy/tmi_physics_2_2_automatically_structured_interface_fields"
+abstract: "TMI-Physics 2.2 is a physics module of the Theory of Manifold Interfaces focused on automatically structured interface fields and computational validation of adaptive interface control in quantum-system simulations."
+keywords:
+  - "Theory of Manifold Interfaces"
+  - "TMI-Physics"
+  - "automatically structured interface fields"
+  - "adaptive interface control"
+  - "quantum simulation"
+  - "Qiskit-Aer"
+  - "computational validation"
