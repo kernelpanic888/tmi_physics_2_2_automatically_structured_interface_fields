@@ -22,13 +22,13 @@ The physical chain of TMI-Physics 2.2 is:
 $$
 g
 \Rightarrow
-\operatorname{Adm}_c(g)
+\mathrm{Adm}_c(g)
 \Rightarrow
 \mathcal H_I(g)
 \Rightarrow
 \Psi_I
 \Rightarrow
-\operatorname{Dist}_{\mathrm{poss}}(\Psi_I;g)
+\mathrm{Dist}_{\mathrm{poss}}(\Psi_I;g)
 \land
 I_0
 \Rightarrow
@@ -36,7 +36,7 @@ I_0
 \Rightarrow
 \mathcal M_{\Xi}^{auto}
 \Rightarrow
-\operatorname{Struct}_I(\mathcal M)
+\mathrm{Struct}_I(\mathcal M)
 $$
 
 Where:
@@ -84,7 +84,7 @@ The structural projection is:
 $$
 \Xi_I^{auto}
 \rightarrow
-\operatorname{Struct}_I
+\mathrm{Struct}_I
 $$
 
 ---
@@ -97,14 +97,14 @@ Instead, it proves an internal theoretical implication:
 
 $$
 \left[
-\Xi_I^{auto}\in\Gamma(\operatorname{End}(\mathcal H_I))
+\Xi_I^{auto}\in\Gamma(\mathrm{End}(\mathcal H_I))
 \land
-\operatorname{Aut}(\Xi_I^{auto})
+\mathrm{Aut}(\Xi_I^{auto})
 \land
-\operatorname{Stab}(\Xi_I^{auto})
+\mathrm{Stab}(\Xi_I^{auto})
 \right]
 \Rightarrow
-\operatorname{Struct}_I
+\mathrm{Struct}_I
 $$
 
 In words:
@@ -209,14 +209,16 @@ Defines the primary interface and automaticity:
 
 $$
 N_0
-\xrightarrow{I_0}
+\rightarrow
+I_0
+\rightarrow
 \Delta_0
 \rightarrow
 (A,\neg A)
 $$
 
 $$
-Valid(I) \Rightarrow Auto(I)
+\mathrm{Valid}(I) \Rightarrow \mathrm{Auto}(I)
 $$
 
 ### 2. TMI-Physics 2.2
@@ -226,7 +228,7 @@ Applies the core to physics:
 $$
 \Xi_I\in\mathfrak I_{phys}
 \Rightarrow
-Auto(\Xi_I)
+\mathrm{Auto}(\Xi_I)
 \Rightarrow
 \Xi_I^{auto}
 $$
@@ -266,9 +268,9 @@ Test 28: out-of-distribution circuit generalization
 The key corrected validation result is:
 
 $$
-Calibrate(I_{sim})
+\mathrm{Calibrate}(I_{sim})
 \land
-Correct(I_{circuit})
+\mathrm{Correct}(I_{circuit})
 \Rightarrow
 P_{TMI}>P_{standard}>P_{base}
 $$
