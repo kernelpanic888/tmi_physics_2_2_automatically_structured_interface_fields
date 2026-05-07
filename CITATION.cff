@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+title: "TMI-Physics 2.2: Automatically Structured Interface Fields"
+message: "If you use this work, please cite it as below."
+type: report
+authors:
+  - family-names: Salkutsan
+    given-names: Aleksey
+version: v0.4
+date-released: 2026-05-07
+license: CC-BY-4.0
+doi: "10.5281/zenodo.20071704"
