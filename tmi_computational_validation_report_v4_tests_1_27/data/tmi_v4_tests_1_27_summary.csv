@@ -23,6 +23,6 @@ test,name,criterion,result
 22,Multi-objective control,Boundary manifold,"standard share = 0.608, cost-aware-low = 0.373"
 23,Standard simulator protocol,Backend-independent Qiskit-style protocol,"Delta = 0.0414, Pr = 0.750"
 24,Raw Qiskit-Aer execution,External simulator without calibration,"failed, Delta = -0.00097, cells = 0/16"
-25,Qiskit noise calibration,Simulator-interface calibration,54 candidate calibrations; Loss_sim = 0.00106
+25,Qiskit noise calibration,Simulator-interface calibration,simulator-interface alignment required; details omitted from public package
 26,Calibrated Qiskit-Aer validation,Held-out calibrated validation,"passed, Delta = 0.0725, cells = 12/16"
 27,Circuit-inverse audit,Correct inverse and rerun Qiskit-Aer,"passed, Delta = 0.1144, cells = 16/16"
